@@ -39,6 +39,8 @@ export const Profile: FC<IProfile> = (props): ReactElement => {
   );
 };
 
+// Proptypes work with JavaScript where as interfaces are only TS
+
 Profile.propTypes = {
   name: PropTypes.string,
 };
