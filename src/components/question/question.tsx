@@ -33,9 +33,9 @@ export const Question: FC<IQuestion> = (props): ReactElement => {
         borderColor: 'error.light',
       }}
     >
-      <QuestionHeader />
-      <QuestionDescription />
-      <QuestionFooter />
+      <QuestionHeader title={title} date={date} />
+      <QuestionDescription description={description} />
+      <QuestionFooter onClick={onClick} onStatusChange={onStatusChange} />
     </Box>
   );
 };
