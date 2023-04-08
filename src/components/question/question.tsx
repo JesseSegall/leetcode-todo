@@ -6,13 +6,15 @@ import { QuestionFooter } from './_questionFooter';
 import { IQuestion } from './interfaces/IQuestion';
 import { Status } from '../addQuestionForm/enums/Status';
 import { Difficulty } from '../addQuestionForm/enums/Difficulty';
+import { renderDifficultyBorderColor } from './helpers/renderDifficultyBorderColor';
+import PropTypes from 'prop-types';
 
 export const Question: FC<IQuestion> = (props): ReactElement => {
   const {
     title,
     date,
     description,
-    difficulty,
+    difficulty = Difficulty.easy,
     status,
     onStatusChange,
     onClick,
@@ -30,7 +32,7 @@ export const Question: FC<IQuestion> = (props): ReactElement => {
         backgroundColor: 'background.paper',
         borderRadius: '8px',
         border: '1px solid',
-        borderColor: 'error.light',
+        borderColor: renderDifficultyBorderColor(difficulty),
       }}
     >
       <QuestionHeader title={title} date={date} />
@@ -38,4 +40,14 @@ export const Question: FC<IQuestion> = (props): ReactElement => {
       <QuestionFooter onClick={onClick} onStatusChange={onStatusChange} />
     </Box>
   );
+};
+
+Question.propTypes = {
+  title: PropTypes.string,
+  date: PropTypes.instanceOf(Date),
+  description: PropTypes.string,
+  difficulty: PropTypes.string,
+  status: PropTypes.string,
+  onStatusChange: PropTypes.func,
+  onClick: PropTypes.func,
 };

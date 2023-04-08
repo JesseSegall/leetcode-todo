@@ -17,8 +17,8 @@ export const QuestionFooter: FC<IQuestionFooter> = (props): ReactElement => {
       alignItems="center"
     >
       <FormControlLabel
-        label="Review"
-        control={<Switch color="warning" onChange={(e) => onStatusChange(e)} />}
+        label="Needs Review"
+        control={<Switch color="info" onChange={(e) => onStatusChange(e)} />}
       ></FormControlLabel>
 
       <Button
