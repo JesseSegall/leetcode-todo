@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC } from 'react';
 import { Box, Typography, Stack } from '@mui/material';
 
 import { QuestionTitleField } from './_questionTitleField';
@@ -38,6 +38,10 @@ export const AddQuestionForm: FC = () => {
               {
                 value: Status.review,
                 label: Status.review.toUpperCase(),
+              },
+              {
+                value: Status.completed,
+                label: Status.completed.toUpperCase(),
               },
             ]}
           />
