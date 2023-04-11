@@ -8,7 +8,7 @@ import { sendApiRequest } from '../../helpers/sendApiRequest';
 import { IQuestionAPI } from './interfaces/IQuestionAPI';
 import { Status } from '../addQuestionForm/enums/Status';
 import { IUpdateQuestion } from '../addQuestionForm/interfaces/IUpdateQuestion';
-
+import { countQuestions } from './helpers/countQuestions';
 export const TaskArea: FC = (): ReactElement => {
   const { error, isLoading, data, refetch } = useQuery(
     ['question'],
@@ -66,7 +66,7 @@ export const TaskArea: FC = (): ReactElement => {
           xs={12}
           mb={8}
         >
-          <QuestionCounter />
+          <QuestionCounter status={Status.todo} />
           <QuestionCounter />
           <QuestionCounter />
         </Grid>

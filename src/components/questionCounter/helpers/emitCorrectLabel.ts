@@ -1,14 +1,13 @@
-import { QuestionCounterDifficultyType } from '../interfaces/IQuestionBorderColor';
-import { Difficulty } from '../../addQuestionForm/enums/Difficulty';
-export const emitCorrectLabel = (
-  difficulty: QuestionCounterDifficultyType,
-): string => {
-  switch (difficulty) {
-    case Difficulty.easy:
-      return `Easy`;
-    case Difficulty.medium:
-      return `Medium`;
-    case Difficulty.hard:
-      return `Hard`;
+import { QuestionCounterStatusType } from './../interfaces/IQuestionCounterStatus';
+
+import { Status } from '../../addQuestionForm/enums/Status';
+export const emitCorrectLabel = (status: QuestionCounterStatusType): string => {
+  switch (status) {
+    case Status.todo:
+      return `Todo`;
+    case Status.review:
+      return `In Review`;
+    case Status.completed:
+      return `Completed`;
   }
 };

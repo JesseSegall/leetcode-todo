@@ -1,15 +1,16 @@
-import { QuestionCounterDifficultyType } from './../interfaces/IQuestionBorderColor';
-import { Difficulty } from '../../addQuestionForm/enums/Difficulty';
+import { QuestionCounterStatusType } from './../interfaces/IQuestionCounterStatus';
+
+import { Status } from '../../addQuestionForm/enums/Status';
 
 export const emitCorrectBorderColors = (
-  difficulty: QuestionCounterDifficultyType,
+  status: QuestionCounterStatusType,
 ): string => {
-  switch (difficulty) {
-    case Difficulty.easy:
-      return 'success.light';
-    case Difficulty.medium:
-      return 'warning.light';
-    case Difficulty.hard:
+  switch (status) {
+    case Status.todo:
       return 'error.light';
+    case Status.review:
+      return 'info';
+    case Status.completed:
+      return 'success.light';
   }
 };

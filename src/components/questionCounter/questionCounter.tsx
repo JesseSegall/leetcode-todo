@@ -1,17 +1,16 @@
 import React, { FC, ReactElement } from 'react';
 import { Avatar, Box, Typography } from '@mui/material';
-import { IQuestionBorderColor } from './interfaces/IQuestionBorderColor';
+import { IQuestionCounter } from './interfaces/IQuestionCounterStatus';
 import { Difficulty } from '../addQuestionForm/enums/Difficulty';
 import { emitCorrectLabel } from './helpers/emitCorrectLabel';
 import { emitCorrectBorderColors } from './helpers/emitCorrectBorderColor';
+import { Status } from '../addQuestionForm/enums/Status';
 import PropTypes from 'prop-types';
 
-export const QuestionCounter: FC<IQuestionBorderColor> = (
-  props,
-): ReactElement => {
+export const QuestionCounter: FC<IQuestionCounter> = (props): ReactElement => {
   // Destructure
 
-  const { difficulty = Difficulty.easy, count = 0 } = props;
+  const { status = Status.todo, count = 0 } = props;
   return (
     <>
       <Box
@@ -27,7 +26,7 @@ export const QuestionCounter: FC<IQuestionBorderColor> = (
             width: '96px',
             height: '96px',
             marginBottom: '16px',
-            borderColor: `${emitCorrectBorderColors(difficulty)}`,
+            borderColor: `${emitCorrectBorderColors(status)}`,
           }}
         >
           <Typography color="#ffffff" variant="h4">
@@ -40,7 +39,7 @@ export const QuestionCounter: FC<IQuestionBorderColor> = (
           fontSize="20px"
           variant="h5"
         >
-          {emitCorrectLabel(difficulty)}
+          {emitCorrectLabel(status)}
         </Typography>
       </Box>
     </>
@@ -49,9 +48,5 @@ export const QuestionCounter: FC<IQuestionBorderColor> = (
 
 QuestionCounter.propTypes = {
   count: PropTypes.number,
-  difficulty: PropTypes.oneOf([
-    Difficulty.easy,
-    Difficulty.medium,
-    Difficulty.hard,
-  ]),
+  status: PropTypes.oneOf([Status.todo, Status.completed, Status.review]),
 };
