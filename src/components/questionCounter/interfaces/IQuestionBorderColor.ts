@@ -5,7 +5,7 @@ export type QuestionCounterDifficultyType =
   | Difficulty.medium
   | Difficulty.hard;
 
-export interface IQuestionCounter {
+export interface IQuestionBorderColor {
   count?: number;
   difficulty?: QuestionCounterDifficultyType;
 }

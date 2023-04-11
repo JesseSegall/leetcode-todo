@@ -1,4 +1,4 @@
-import { QuestionCounterDifficultyType } from './../interfaces/IQuestionCounter';
+import { QuestionCounterDifficultyType } from './../interfaces/IQuestionBorderColor';
 import { Difficulty } from '../../addQuestionForm/enums/Difficulty';
 
 export const emitCorrectBorderColors = (

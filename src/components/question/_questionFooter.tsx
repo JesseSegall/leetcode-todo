@@ -2,12 +2,17 @@ import React, { FC, ReactElement } from 'react';
 import { Box, Switch, FormControlLabel, Button } from '@mui/material';
 import PropTypes from 'prop-types';
 import { IQuestionFooter } from './interfaces/iQuestionFooter';
+import { Status } from '../addQuestionForm/enums/Status';
 
 export const QuestionFooter: FC<IQuestionFooter> = (props): ReactElement => {
   const {
+    id,
+    status,
     onStatusChange = (e) => console.log(e),
     onClick = (e) => console.log(e),
   } = props;
+  console.log(Status.review);
+  console.log(status);
   return (
     <Box
       display="flex"
@@ -18,7 +23,13 @@ export const QuestionFooter: FC<IQuestionFooter> = (props): ReactElement => {
     >
       <FormControlLabel
         label="Needs Review"
-        control={<Switch color="info" onChange={(e) => onStatusChange(e)} />}
+        control={
+          <Switch
+            onChange={(e) => onStatusChange(e, id)}
+            color="info"
+            defaultChecked={status === Status.review}
+          />
+        }
       ></FormControlLabel>
 
       <Button
@@ -26,7 +37,7 @@ export const QuestionFooter: FC<IQuestionFooter> = (props): ReactElement => {
         color="success"
         size="small"
         sx={{ color: '#ffffff' }}
-        onClick={(e) => onClick(e)}
+        onClick={(e) => onClick(e, id)}
       >
         Mark Complete
       </Button>
@@ -37,4 +48,6 @@ export const QuestionFooter: FC<IQuestionFooter> = (props): ReactElement => {
 QuestionFooter.propTypes = {
   onStatusChange: PropTypes.func,
   onClick: PropTypes.func,
+  id: PropTypes.string.isRequired,
+  status: PropTypes.string,
 };

@@ -1,10 +1,53 @@
 import React, { FC, ReactElement } from 'react';
 import { format } from 'date-fns';
-import { Grid, Box } from '@mui/material';
+import { Grid, Box, Alert, LinearProgress } from '@mui/material';
 import { QuestionCounter } from '../questionCounter/questionCounter';
 import { Question } from '../question/question';
+import { useQuery, useMutation } from '@tanstack/react-query';
+import { sendApiRequest } from '../../helpers/sendApiRequest';
+import { IQuestionAPI } from './interfaces/IQuestionAPI';
+import { Status } from '../addQuestionForm/enums/Status';
+import { IUpdateQuestion } from '../addQuestionForm/interfaces/IUpdateQuestion';
 
 export const TaskArea: FC = (): ReactElement => {
+  const { error, isLoading, data, refetch } = useQuery(
+    ['question'],
+    async () => {
+      return await sendApiRequest<IQuestionAPI[]>(
+        'http://localhost:3200/questions',
+        'GET',
+      );
+    },
+  );
+
+  // Update question mutation
+
+  const updateQuestionMutation = useMutation((data: IUpdateQuestion) =>
+    sendApiRequest('http://localhost:3200/questions', 'PUT', data),
+  );
+
+  function onStatusChangeHandler(
+    e: React.ChangeEvent<HTMLInputElement>,
+    id: string,
+  ) {
+    updateQuestionMutation.mutate({
+      id,
+      status: e.target.checked ? Status.review : Status.todo,
+    });
+  }
+
+  function markCompleteHandler(
+    e:
+      | React.MouseEvent<HTMLButtonElement>
+      | React.MouseEvent<HTMLAnchorElement>,
+    id: string,
+  ) {
+    updateQuestionMutation.mutate({
+      id,
+      status: Status.completed,
+    });
+  }
+
   return (
     <Grid item md={8} px={4}>
       <Box mb={8} px={4}>
@@ -28,8 +71,44 @@ export const TaskArea: FC = (): ReactElement => {
           <QuestionCounter />
         </Grid>
         <Grid item display="flex" flexDirection="column" xs={10} md={8}>
-          <Question />
-          <Question />
+          <>
+            {error && (
+              <Alert severity="error">
+                There was an error fetching your tasks
+              </Alert>
+            )}
+
+            {!error && Array.isArray(data) && data.length === 0 && (
+              <Alert severity="warning">
+                You do not have any tasks created yet. Start by creating some
+                tasks
+              </Alert>
+            )}
+            {isLoading ? (
+              <LinearProgress />
+            ) : (
+              Array.isArray(data) &&
+              data.length > 0 &&
+              data.map((each, index) => {
+                return each.status === Status.todo ||
+                  each.status === Status.review ? (
+                  <Question
+                    key={index + each.difficulty}
+                    id={each.id}
+                    title={each.title}
+                    date={new Date(each.date)}
+                    description={each.description}
+                    difficulty={each.difficulty}
+                    onStatusChange={onStatusChangeHandler}
+                    status={each.status}
+                    onClick={markCompleteHandler}
+                  />
+                ) : (
+                  false
+                );
+              })
+            )}
+          </>
         </Grid>
       </Grid>
     </Grid>

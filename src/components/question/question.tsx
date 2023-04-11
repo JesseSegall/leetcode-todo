@@ -15,9 +15,10 @@ export const Question: FC<IQuestion> = (props): ReactElement => {
     date,
     description,
     difficulty = Difficulty.easy,
-    status,
+    status = Status.completed,
     onStatusChange,
     onClick,
+    id,
   } = props;
   return (
     <Box
@@ -37,7 +38,12 @@ export const Question: FC<IQuestion> = (props): ReactElement => {
     >
       <QuestionHeader title={title} date={date} />
       <QuestionDescription description={description} />
-      <QuestionFooter onClick={onClick} onStatusChange={onStatusChange} />
+      <QuestionFooter
+        onClick={onClick}
+        onStatusChange={onStatusChange}
+        id={id}
+        status={status}
+      />
     </Box>
   );
 };

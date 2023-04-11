@@ -1,12 +1,14 @@
 import React, { FC, ReactElement } from 'react';
 import { Avatar, Box, Typography } from '@mui/material';
-import { IQuestionCounter } from './interfaces/IQuestionCounter';
+import { IQuestionBorderColor } from './interfaces/IQuestionBorderColor';
 import { Difficulty } from '../addQuestionForm/enums/Difficulty';
 import { emitCorrectLabel } from './helpers/emitCorrectLabel';
 import { emitCorrectBorderColors } from './helpers/emitCorrectBorderColor';
 import PropTypes from 'prop-types';
 
-export const QuestionCounter: FC<IQuestionCounter> = (props): ReactElement => {
+export const QuestionCounter: FC<IQuestionBorderColor> = (
+  props,
+): ReactElement => {
   // Destructure
 
   const { difficulty = Difficulty.easy, count = 0 } = props;

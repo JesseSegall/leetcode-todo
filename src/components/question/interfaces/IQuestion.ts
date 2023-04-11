@@ -6,7 +6,5 @@ export interface IQuestion
   extends IQuestionDescription,
     IQuestionFooter,
     IQuestionHeader {
-  id?: string;
   difficulty?: string;
-  status?: string;
 }
