@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, useContext, useEffect } from 'react';
 import { format } from 'date-fns';
 import { Grid, Box, Alert, LinearProgress } from '@mui/material';
 import { QuestionCounter } from '../questionCounter/questionCounter';
@@ -9,7 +9,10 @@ import { IQuestionAPI } from './interfaces/IQuestionAPI';
 import { Status } from '../addQuestionForm/enums/Status';
 import { IUpdateQuestion } from '../addQuestionForm/interfaces/IUpdateQuestion';
 import { countQuestions } from './helpers/countQuestions';
+import { QuestionStatusChangeContext } from '../../context';
 export const TaskArea: FC = (): ReactElement => {
+  const questionsUpdatedContext = useContext(QuestionStatusChangeContext);
+
   const { error, isLoading, data, refetch } = useQuery(
     ['question'],
     async () => {
@@ -25,6 +28,16 @@ export const TaskArea: FC = (): ReactElement => {
   const updateQuestionMutation = useMutation((data: IUpdateQuestion) =>
     sendApiRequest('http://localhost:3200/questions', 'PUT', data),
   );
+
+  useEffect(() => {
+    refetch();
+  }, [questionsUpdatedContext.updated]);
+
+  useEffect(() => {
+    if (updateQuestionMutation.isSuccess) {
+      questionsUpdatedContext.toggle();
+    }
+  }, [updateQuestionMutation.isSuccess]);
 
   function onStatusChangeHandler(
     e: React.ChangeEvent<HTMLInputElement>,
@@ -66,9 +79,18 @@ export const TaskArea: FC = (): ReactElement => {
           xs={12}
           mb={8}
         >
-          <QuestionCounter status={Status.todo} />
-          <QuestionCounter />
-          <QuestionCounter />
+          <QuestionCounter
+            count={data ? countQuestions(data, Status.todo) : undefined}
+            status={Status.todo}
+          />
+          <QuestionCounter
+            status={Status.review}
+            count={data ? countQuestions(data, Status.review) : undefined}
+          />
+          <QuestionCounter
+            status={Status.completed}
+            count={data ? countQuestions(data, Status.completed) : undefined}
+          />
         </Grid>
         <Grid item display="flex" flexDirection="column" xs={10} md={8}>
           <>

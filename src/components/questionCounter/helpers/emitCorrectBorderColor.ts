@@ -9,7 +9,7 @@ export const emitCorrectBorderColors = (
     case Status.todo:
       return 'error.light';
     case Status.review:
-      return 'info';
+      return 'info.light';
     case Status.completed:
       return 'success.light';
   }

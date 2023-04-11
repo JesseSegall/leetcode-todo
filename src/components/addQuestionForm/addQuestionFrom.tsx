@@ -1,4 +1,10 @@
-import React, { FC, useState, ReactElement, useEffect } from 'react';
+import React, {
+  FC,
+  useState,
+  ReactElement,
+  useEffect,
+  useContext,
+} from 'react';
 import {
   Box,
   Typography,
@@ -9,6 +15,7 @@ import {
   AlertTitle,
 } from '@mui/material';
 
+import { QuestionStatusChangeContext } from '../../context';
 import { QuestionTitleField } from './_questionTitleField';
 import { QuestionDescriptionField } from './_questionDescriptionField';
 import { QuestionReviewDate } from './_questionReviewDate';
@@ -28,13 +35,20 @@ export const AddQuestionForm: FC = (): ReactElement => {
   const [status, setStatus] = useState<string>(Status.todo);
   const [difficulty, setDifficulty] = useState<string>(Difficulty.easy);
   const [showSuccess, setShowSuccess] = useState<boolean>(false);
+  const questionUpdatedContext = useContext(QuestionStatusChangeContext);
 
   // Create question mutation
 
   const createQuestionMutation = useMutation((data: ICreateQuestion) =>
     sendApiRequest('http://localhost:3200/questions', 'POST', data),
   );
-
+  function clearFormFields() {
+    setTitle(undefined);
+    setDescription('');
+    setDate(new Date());
+    setStatus(Status.todo);
+    setDifficulty(Difficulty.easy);
+  }
   function createQuestionHandler() {
     if (!title || !date || !description) {
       return;
@@ -47,17 +61,21 @@ export const AddQuestionForm: FC = (): ReactElement => {
       date: date.toString(),
       difficulty,
     };
+
     createQuestionMutation.mutate(question);
+    clearFormFields();
   }
 
   useEffect(() => {
     if (createQuestionMutation.isSuccess) {
       setShowSuccess(true);
+      questionUpdatedContext.toggle();
+      clearFormFields();
     }
 
     const successTimeout = setTimeout(() => {
       setShowSuccess(false);
-    }, 500);
+    }, 3000);
 
     return () => {
       clearTimeout(successTimeout);

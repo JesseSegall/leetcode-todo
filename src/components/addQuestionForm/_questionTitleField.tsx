@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 export const QuestionTitleField: FC<ITextField> = (props): ReactElement => {
   // Destructuring the props
   const { onChange = (e) => console.log(e), disabled = false } = props;
+
   return (
     <TextField
       id="title"

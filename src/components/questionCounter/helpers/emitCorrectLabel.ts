@@ -6,7 +6,7 @@ export const emitCorrectLabel = (status: QuestionCounterStatusType): string => {
     case Status.todo:
       return `Todo`;
     case Status.review:
-      return `In Review`;
+      return `Need Review`;
     case Status.completed:
       return `Completed`;
   }
