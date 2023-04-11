@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 import { Avatar, Box, Typography } from '@mui/material';
 import { IQuestionCounter } from './interfaces/IQuestionCounterStatus';
-import { Difficulty } from '../addQuestionForm/enums/Difficulty';
+
 import { emitCorrectLabel } from './helpers/emitCorrectLabel';
 import { emitCorrectBorderColors } from './helpers/emitCorrectBorderColor';
 import { Status } from '../addQuestionForm/enums/Status';
