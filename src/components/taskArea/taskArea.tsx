@@ -102,8 +102,8 @@ export const TaskArea: FC = (): ReactElement => {
 
             {!error && Array.isArray(data) && data.length === 0 && (
               <Alert severity="warning">
-                You do not have any tasks created yet. Start by creating some
-                tasks
+                You do not have any questions created yet. Start by adding a
+                question!
               </Alert>
             )}
             {isLoading ? (
