@@ -14,6 +14,7 @@ import {
   Alert,
   AlertTitle,
 } from '@mui/material';
+import ShowHideCompletedButton from '../taskArea/showCompletedButton';
 
 import { QuestionStatusChangeContext } from '../../context';
 import { QuestionTitleField } from './_questionTitleField';
@@ -36,6 +37,8 @@ export const AddQuestionForm: FC = (): ReactElement => {
   const [difficulty, setDifficulty] = useState<string>(Difficulty.easy);
   const [showSuccess, setShowSuccess] = useState<boolean>(false);
   const questionUpdatedContext = useContext(QuestionStatusChangeContext);
+
+  const [showCompleted, setShowCompleted] = useState<boolean>(false);
 
   // Create question mutation
 
@@ -174,6 +177,7 @@ export const AddQuestionForm: FC = (): ReactElement => {
         >
           Add a Question
         </Button>
+        <ShowHideCompletedButton />
       </Stack>
     </Box>
   );

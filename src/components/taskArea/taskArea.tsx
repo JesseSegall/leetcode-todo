@@ -1,6 +1,13 @@
-import React, { FC, ReactElement, useContext, useEffect } from 'react';
+import React, {
+  FC,
+  ReactElement,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { format } from 'date-fns';
-import { Grid, Box, Alert, LinearProgress } from '@mui/material';
+import { ShowCompletedContext } from '../../context';
+import { Grid, Box, Alert, LinearProgress, Button } from '@mui/material';
 import { QuestionCounter } from '../questionCounter/questionCounter';
 import { Question } from '../question/question';
 import { useQuery, useMutation } from '@tanstack/react-query';
@@ -12,6 +19,8 @@ import { countQuestions } from './helpers/countQuestions';
 import { QuestionStatusChangeContext } from '../../context';
 export const TaskArea: FC = (): ReactElement => {
   const questionsUpdatedContext = useContext(QuestionStatusChangeContext);
+
+  const { showCompleted } = useContext(ShowCompletedContext);
 
   const { error, isLoading, data, refetch } = useQuery(
     ['question'],
@@ -92,6 +101,7 @@ export const TaskArea: FC = (): ReactElement => {
             count={data ? countQuestions(data, Status.completed) : undefined}
           />
         </Grid>
+
         <Grid item display="flex" flexDirection="column" xs={10} md={8}>
           <>
             {error && (
@@ -113,7 +123,8 @@ export const TaskArea: FC = (): ReactElement => {
               data.length > 0 &&
               data.map((each, index) => {
                 return each.status === Status.todo ||
-                  each.status === Status.review ? (
+                  each.status === Status.review ||
+                  (showCompleted && each.status === Status.completed) ? (
                   <Question
                     key={index + each.difficulty}
                     id={each.id}

@@ -1,3 +1,6 @@
 import { QuestionStatusChangedContextProvider } from './QuestionStatusChangeContext/QuestionStatusChangeContext';
-
-export const rootContext = [QuestionStatusChangedContextProvider];
+import { ShowCompletedContextProvider } from './ShowCompletedContext/ShowCompletedContext';
+export const rootContext = [
+  QuestionStatusChangedContextProvider,
+  ShowCompletedContextProvider,
+];
