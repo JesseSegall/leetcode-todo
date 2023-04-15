@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 import { Grid } from '@mui/material';
 import { Profile } from '../profile/profile';
-import { AddQuestionForm } from '../addQuestionForm/addQuestionFrom';
+import { AddQuestionForm } from '../addQuestionForm/addQuestionForm';
 
 export const Sidebar: FC = (): ReactElement => {
   return (

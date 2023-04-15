@@ -5,4 +5,6 @@ export interface ITextField extends IDisabled {
   onChange?: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
+  titleValue?: string;
+  descriptionValue?: string;
 }

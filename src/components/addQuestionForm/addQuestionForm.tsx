@@ -106,10 +106,12 @@ export const AddQuestionForm: FC = (): ReactElement => {
         <QuestionTitleField
           onChange={(e) => setTitle(e.target.value)}
           disabled={createQuestionMutation.isLoading}
+          titleValue={title}
         />
         <QuestionDescriptionField
           onChange={(e) => setDescription(e.target.value)}
           disabled={createQuestionMutation.isLoading}
+          descriptionValue={description}
         />
         <QuestionReviewDate
           value={date}

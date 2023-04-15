@@ -5,7 +5,11 @@ import PropTypes from 'prop-types';
 export const QuestionDescriptionField: FC<ITextField> = (
   props,
 ): ReactElement => {
-  const { onChange = (e) => console.log(e), disabled = false } = props;
+  const {
+    onChange = (e) => console.log(e),
+    disabled = false,
+    descriptionValue = '',
+  } = props;
   return (
     <TextField
       id="description"
@@ -19,6 +23,7 @@ export const QuestionDescriptionField: FC<ITextField> = (
       fullWidth
       onChange={onChange}
       disabled={disabled}
+      value={descriptionValue}
     />
   );
 };
