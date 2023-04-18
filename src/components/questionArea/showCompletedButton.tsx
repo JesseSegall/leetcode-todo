@@ -15,5 +15,3 @@ export const ShowHideCompletedButton: FC = () => {
     </Button>
   );
 };
-
-export default ShowHideCompletedButton;

@@ -1,13 +1,7 @@
-import React, {
-  FC,
-  ReactElement,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import React, { FC, ReactElement, useContext, useEffect } from 'react';
 import { format } from 'date-fns';
 import { ShowCompletedContext } from '../../context';
-import { Grid, Box, Alert, LinearProgress, Button } from '@mui/material';
+import { Grid, Box, Alert, LinearProgress } from '@mui/material';
 import { QuestionCounter } from '../questionCounter/questionCounter';
 import { Question } from '../question/question';
 import { useQuery, useMutation } from '@tanstack/react-query';
@@ -17,7 +11,8 @@ import { Status } from '../addQuestionForm/enums/Status';
 import { IUpdateQuestion } from '../addQuestionForm/interfaces/IUpdateQuestion';
 import { countQuestions } from './helpers/countQuestions';
 import { QuestionStatusChangeContext } from '../../context';
-export const TaskArea: FC = (): ReactElement => {
+
+export const QuestionArea: FC = (): ReactElement => {
   const questionsUpdatedContext = useContext(QuestionStatusChangeContext);
 
   const { showCompleted } = useContext(ShowCompletedContext);

@@ -16,7 +16,7 @@ export const QuestionReviewDate: FC<IDateField> = (props): ReactElement => {
     <>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DesktopDatePicker
-          label="Review Date"
+          label="Date"
           format="MM/dd/yyyy"
           value={value}
           onChange={onChange}

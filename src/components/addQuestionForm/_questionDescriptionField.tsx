@@ -2,7 +2,7 @@ import React, { FC, ReactElement } from 'react';
 import { TextField } from '@mui/material';
 import { ITextField } from './interfaces/ITextField';
 import PropTypes from 'prop-types';
-import Linkify from 'react-linkify';
+
 export const QuestionDescriptionField: FC<ITextField> = (
   props,
 ): ReactElement => {

@@ -14,7 +14,7 @@ import {
   Alert,
   AlertTitle,
 } from '@mui/material';
-import ShowHideCompletedButton from '../taskArea/showCompletedButton';
+import { ShowHideCompletedButton } from '../questionArea/showCompletedButton';
 
 import { QuestionStatusChangeContext } from '../../context';
 import { QuestionTitleField } from './_questionTitleField';
@@ -25,7 +25,7 @@ import { Status } from './enums/Status';
 import { Difficulty } from './enums/Difficulty';
 import { useMutation } from '@tanstack/react-query';
 import { sendApiRequest } from '../../helpers/sendApiRequest';
-import { ICreateQuestion } from '../taskArea/interfaces/ICreateQuestion';
+import { ICreateQuestion } from '../questionArea/interfaces/ICreateQuestion';
 
 export const AddQuestionForm: FC = (): ReactElement => {
   // Declaring States
@@ -37,8 +37,6 @@ export const AddQuestionForm: FC = (): ReactElement => {
   const [difficulty, setDifficulty] = useState<string>(Difficulty.easy);
   const [showSuccess, setShowSuccess] = useState<boolean>(false);
   const questionUpdatedContext = useContext(QuestionStatusChangeContext);
-
-  const [showCompleted, setShowCompleted] = useState<boolean>(false);
 
   // Create question mutation
 
