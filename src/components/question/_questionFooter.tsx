@@ -11,8 +11,7 @@ export const QuestionFooter: FC<IQuestionFooter> = (props): ReactElement => {
     onStatusChange = (e) => console.log(e),
     onClick = (e) => console.log(e),
   } = props;
-  console.log(Status.review);
-  console.log(status);
+
   return (
     <Box
       display="flex"

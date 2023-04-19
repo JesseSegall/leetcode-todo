@@ -19,7 +19,7 @@ export const QuestionSelectField: FC<ISelectField> = (props): ReactElement => {
     label,
     name,
     items = [{ value: '', label: 'Add Items' }],
-    disabled = false,
+
     onChange = (e: SelectChangeEvent) => console.log(e),
   } = props;
 

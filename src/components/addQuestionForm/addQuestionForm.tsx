@@ -26,7 +26,6 @@ import { Difficulty } from './enums/Difficulty';
 import { useMutation } from '@tanstack/react-query';
 import { sendApiRequest } from '../../helpers/sendApiRequest';
 import { ICreateQuestion } from '../questionArea/interfaces/ICreateQuestion';
-
 export const AddQuestionForm: FC = (): ReactElement => {
   // Declaring States
 

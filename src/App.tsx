@@ -15,7 +15,7 @@ const App: FC = (): ReactElement => {
     <QueryClientProvider client={queryClient}>
       <ComposeContext components={rootContext}>
         <ThemeProvider theme={customTheme}>
-          {/* This just resets the base CSS based on options provided */}
+          {/* This just resets the base CSS based on options provided from theme provider */}
           <CssBaseline />
           <Dashboard />
         </ThemeProvider>
