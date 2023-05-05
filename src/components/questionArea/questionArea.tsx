@@ -101,7 +101,7 @@ export const QuestionArea: FC = (): ReactElement => {
           <>
             {error && (
               <Alert severity="error">
-                There was an error fetching your tasks
+                There was an error fetching your questions
               </Alert>
             )}
 

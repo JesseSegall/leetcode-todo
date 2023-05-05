@@ -7,6 +7,7 @@ interface IComposeContext {
 
 // Take in all context and return them as indiv components
 // Will loop through all components that are passed as props, and nest them inside each other
+// Children is the initial value for the accumulator
 export default function ComposeContext(props: IComposeContext) {
   const { components = [], children } = props;
   return (
